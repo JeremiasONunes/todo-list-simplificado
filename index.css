@@ -1,0 +1,61 @@
+/* Importa todas as classes do Tailwind CSS */
+@import "tailwindcss";
+
+/* Layer base: estilos que afetam elementos HTML básicos */
+@layer base {
+  /* Aplica transições suaves em todos os elementos */
+  * {
+    /* Transição de 200ms com easing suave para todas as propriedades CSS */
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Estilo do corpo da página */
+  body {
+    /* Gradiente diagonal: começa cinza escuro, passa por roxo, volta ao cinza */
+    /* from-slate-900: cor inicial (canto superior esquerdo) */
+    /* via-purple-900: cor intermediária (centro) */
+    /* to-slate-900: cor final (canto inferior direito) */
+    @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+  }
+}
+
+/* Layer components: classes reutilizáveis para componentes */
+@layer components {
+  /* Efeito "glass morphism" - vidro fosco moderno */
+  .glass-effect {
+    /* backdrop-blur-sm: desfoque sutil do fundo */
+    /* bg-white/10: fundo branco com 10% de opacidade */
+    /* border border-white/20: borda branca com 20% de opacidade */
+    @apply backdrop-blur-sm bg-white/10 border border-white/20;
+  }
+  
+  /* Botão primário com gradiente e animações */
+  .btn-primary {
+    /* bg-gradient-to-r: gradiente horizontal da esquerda para direita */
+    /* from-purple-500 to-pink-500: cores do gradiente normal */
+    /* hover:from-purple-600 hover:to-pink-600: cores mais escuras no hover */
+    /* text-white: texto branco */
+    /* font-medium: peso da fonte médio */
+    /* px-6 py-3: padding horizontal 24px, vertical 12px */
+    /* rounded-xl: bordas bem arredondadas */
+    /* shadow-lg: sombra grande */
+    /* hover:shadow-xl: sombra extra grande no hover */
+    /* transform hover:scale-105: aumenta 5% no hover */
+    @apply bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105;
+  }
+  
+  /* Input moderno com efeito glass */
+  .input-modern {
+    /* bg-white/10: fundo branco semi-transparente */
+    /* backdrop-blur-sm: desfoque do fundo */
+    /* border border-white/20: borda sutil */
+    /* text-white: texto branco */
+    /* placeholder-white/60: placeholder branco com 60% opacidade */
+    /* rounded-xl: bordas arredondadas */
+    /* px-4 py-3: padding interno */
+    /* focus:outline-none: remove outline padrão do navegador */
+    /* focus:ring-2 focus:ring-purple-400: anel roxo de 2px no focus */
+    /* focus:border-transparent: remove borda no focus */
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/60 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent;
+  }
+}

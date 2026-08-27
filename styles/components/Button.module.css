@@ -1,0 +1,107 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    background var(--duration-base) var(--ease-out);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Tamanhos */
+.sm {
+  padding: 6px 14px;
+  font-size: var(--text-sm);
+}
+.md {
+  padding: 10px 20px;
+  font-size: var(--text-base);
+}
+.lg {
+  padding: 14px 28px;
+  font-size: var(--text-md);
+}
+
+/*
+ * `primary`: cor CHAPADA (não gradiente — o Lythra não usa gradiente em
+ * botão nenhum) + sombra "clay" pra dar a sensação de relevo/elevação, no
+ * lugar do glow que existia antes. `translateY(2px)` sem sombra nenhuma no
+ * `:active` simula o botão "afundando" quando clicado — mesmo princípio do
+ * `--shadow-pressed` (`inset`), aplicado aqui só com deslocamento porque o
+ * botão pill já é pequeno o bastante pra não precisar do par de sombras.
+ */
+.primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--primary-pressed);
+  color: var(--on-primary);
+}
+
+.primary:active:not(:disabled) {
+  box-shadow: var(--shadow-pressed);
+  transform: translateY(2px);
+}
+
+/* `secondary`: fundo sálvia chapado — ação que ainda é uma ação de
+ * verdade (não é "sem ênfase" como `ghost`), só não é a principal da tela. */
+.secondary {
+  background: var(--secondary);
+  color: var(--on-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.secondary:hover:not(:disabled) {
+  color: var(--on-secondary);
+}
+
+.secondary:active:not(:disabled) {
+  box-shadow: var(--shadow-pressed);
+  transform: translateY(2px);
+}
+
+/* `ghost`: sem fundo próprio — usado dentro de cards, onde um contorno a mais
+ * seria ruído visual */
+.ghost {
+  background: transparent;
+  color: var(--on-surface-muted);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+.danger {
+  background: var(--danger);
+  color: var(--on-danger);
+  box-shadow: var(--shadow-md);
+}
+
+.danger:hover:not(:disabled) {
+  color: var(--on-danger);
+}
+
+.danger:active:not(:disabled) {
+  box-shadow: var(--shadow-pressed);
+  transform: translateY(2px);
+}

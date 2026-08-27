@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.buscaWrapper {
+  position: relative;
+}
+
+.buscaIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--on-surface-muted);
+  pointer-events: none;
+}
+
+.busca {
+  width: 100%;
+  padding-left: 40px;
+}
+
+.selects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .selects {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

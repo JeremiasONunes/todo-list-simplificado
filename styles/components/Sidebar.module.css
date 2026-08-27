@@ -1,0 +1,109 @@
+/* Mobile first: barra inferior fixa, sem marca (sem espaço sobrando numa
+ * barra de ~72px de altura) — a partir de 768px vira sidebar em fluxo
+ * normal, com a marca no topo. Mesma estrutura do `AppNavigation` do
+ * Lythra, ver comentário lá pra o raciocínio completo do breakpoint. */
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  padding: var(--space-2);
+  background: var(--surface);
+  border-top: 1px solid var(--outline);
+  box-shadow: var(--shadow-md);
+}
+
+.marca {
+  display: none;
+}
+
+.lista {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--on-surface-muted);
+  text-decoration: none;
+  appearance: none;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.item.ativo {
+  color: var(--primary);
+}
+
+/* Ícone `lucide-react` — cor vem de `currentColor` (herda de `.item`/
+ * `.item.ativo` sozinho, sem CSS extra); `flex-shrink: 0` evita que ele
+ * encolha quando o rótulo ao lado é mais longo (`Analytics`, desktop). */
+.item svg {
+  flex-shrink: 0;
+}
+
+.itemRotulo {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+
+@media (min-width: 768px) {
+  .nav {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+    width: 220px;
+    min-height: 100vh;
+    padding: var(--space-6) var(--space-4);
+    gap: var(--space-6);
+    background: var(--surface);
+    border-top: none;
+    border-right: 1px solid var(--outline);
+    box-shadow: none;
+  }
+
+  .marca {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-lg);
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .lista {
+    flex: initial;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--space-1);
+  }
+
+  .item {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    padding: 10px 12px;
+  }
+
+  .item.ativo {
+    background: var(--surface-raised);
+  }
+
+  .itemRotulo {
+    font-size: var(--text-sm);
+  }
+}

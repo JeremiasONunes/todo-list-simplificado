@@ -1,0 +1,42 @@
+/*
+ * Tipografia — a fidelidade de tokens pedida nesta fase (ver `colors.css`)
+ * é sobre COR, não fonte: continua só a fonte do sistema operacional
+ * (`system-ui`), de propósito — o Lythra autohospeda Fredoka/Nunito via
+ * `@fontsource`, mas adicionar essa dependência só pra "parecer com o
+ * Lythra" seria peso sem necessidade real que ninguém pediu. `ui-rounded`
+ * entra no fallback do `--font-display` (não existia antes): Fredoka É uma
+ * fonte arredondada, e `ui-rounded` é o equivalente NATIVO mais próximo
+ * (SF Rounded no Safari/iOS) — um jeito de puxar um pouco na direção
+ * "clay" sem baixar nada. `--font-display`/`--font-body` continuam
+ * separados mesmo assim — se um dia fizer sentido diferenciar título de
+ * corpo com uma fonte própria, só o valor do token muda.
+ *
+ * A escala de tamanho (`--text-*`) já era idêntica à do Lythra desde a
+ * Fase 1 (mesmo método, 8 degraus) — sem mudança aqui. `--leading-*` e
+ * `--weight-display` alinhados aos valores exatos do Lythra agora.
+ */
+:root {
+  --font-display: system-ui, ui-rounded, -apple-system, 'Segoe UI', ui-sans-serif, sans-serif;
+  --font-body:
+    system-ui, -apple-system, 'Segoe UI', ui-sans-serif, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3rem; /* só usado em título de Landing (Fase 3) */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-display: 600; /* peso padrão da fonte de exibição, ver Lythra */
+}

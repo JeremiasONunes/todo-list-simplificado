@@ -1,0 +1,54 @@
+/* `height` fixa (não `min-height`) — a `Sidebar` nunca deve crescer/encolher
+ * com o conteúdo, sempre ocupa exatamente a altura da tela; é `.content`
+ * quem rola por dentro quando a página é mais alta que a viewport. Mesmo
+ * raciocínio do `ReaderLayout` do Lythra. */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  /* `min-height: 0` cancela o `min-height: auto` padrão de item flex, que
+   * senão impede o `overflow-y: auto` de funcionar. */
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  /* Espaço pra `Sidebar` (barra inferior fixa no mobile) não cobrir o fim do
+   * conteúdo — mais que só a altura da barra (~72px), sobra respiro visual
+   * antes dela; mesmo valor (e mesmo motivo) do `ReaderLayout` do Lythra. */
+  padding-bottom: 96px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+  }
+
+  .content {
+    padding-bottom: 0;
+  }
+}
+
+/* Fora da tela por padrão, `:focus` traz de volta — mesmo componente que
+ * `PublicLayout.module.css` define (duplicado de propósito, ver comentário
+ * em `AuthenticatedLayout.jsx`). */
+.skipLink {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}

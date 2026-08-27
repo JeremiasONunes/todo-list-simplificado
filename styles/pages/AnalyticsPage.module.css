@@ -1,0 +1,127 @@
+.wrapper {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.titulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.subtitulo {
+  color: var(--on-surface-muted);
+  margin: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cardTitulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-md);
+  margin: 0;
+}
+
+/* Gráfico de barras vertical — mesma técnica do Lythra (`ReadingStatsCharts`):
+ * altura de cada barra proporcional à maior contagem do conjunto, sem
+ * biblioteca de gráfico. `role="img"` + `aria-label` no elemento pai porque,
+ * pra leitor de tela, isto é uma imagem única (o gráfico), não 7 elementos
+ * soltos. */
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: 140px;
+}
+
+.coluna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  height: 100%;
+  min-width: 0;
+}
+
+.colunaValor {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--on-surface-muted);
+  height: 1em;
+}
+
+.barra {
+  width: 100%;
+  min-height: 2px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  transition: height var(--duration-base) var(--ease-standard);
+}
+
+.colunaLabel {
+  font-size: var(--text-xs);
+  color: var(--on-surface-muted);
+  text-transform: capitalize;
+}
+
+/* Distribuição por prioridade — mesmo princípio (barra proporcional à maior
+ * contagem), só que HORIZONTAL: 4 categorias nomeadas ficam mais legíveis em
+ * linha (rótulo + barra + número) do que em coluna. */
+.linhasPrioridade {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.linhaPrioridade {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.trilha {
+  flex: 1;
+  height: 8px;
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.trilhaBarra {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-base) var(--ease-standard);
+}
+
+.linhaQuantidade {
+  min-width: 1.5em;
+  text-align: right;
+  font-weight: var(--weight-semibold);
+  color: var(--on-surface);
+}

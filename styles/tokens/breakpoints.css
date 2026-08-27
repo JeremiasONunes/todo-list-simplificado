@@ -1,0 +1,13 @@
+/*
+ * 2 pontos de quebra — mobile é a base (sem media query), os dois valores marcam
+ * onde o layout ganha mais espaço. Mesma ressalva do Lythra: custom property não
+ * funciona dentro da CONDIÇÃO de um `@media` (o navegador precisa resolver quais
+ * regras de media query se aplicam antes de montar a árvore de elementos e
+ * calcular valor de variável, que é por-elemento — um passo "depois"). Os
+ * valores abaixo são só a referência documentada; cada `@media` escreve o pixel
+ * por extenso, sempre um destes dois.
+ */
+:root {
+  --breakpoint-tablet: 768px; /* usar em @media (min-width: 768px) */
+  --breakpoint-desktop: 1024px; /* usar em @media (min-width: 1024px) */
+}

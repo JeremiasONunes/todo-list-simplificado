@@ -1,0 +1,10 @@
+/*
+ * Ponto único de entrada dos tokens — importado uma vez em `main.jsx`. Nenhum
+ * outro arquivo importa de `tokens/` diretamente; todo componente consome via
+ * `var(--nome-do-token)`.
+ */
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/effects.css';
+@import './tokens/breakpoints.css';

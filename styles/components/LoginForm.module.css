@@ -1,0 +1,56 @@
+.card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.titulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  text-align: center;
+  margin: 0;
+  color: var(--text-heading);
+}
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.erroGeral {
+  color: var(--danger);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+.rodape {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--on-surface-muted);
+  margin: 0;
+}
+.rodape a {
+  color: var(--text-link);
+}
+.rodape a:hover {
+  color: var(--text-link-hover);
+}
+
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  border: 1px dashed var(--outline);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--on-surface-muted);
+}
+.demo p {
+  margin: 0;
+}
+.demoTitulo {
+  font-weight: var(--weight-semibold);
+  color: var(--on-surface);
+}

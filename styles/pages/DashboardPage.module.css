@@ -1,0 +1,117 @@
+.wrapper {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.titulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.subtitulo {
+  color: var(--on-surface-muted);
+  margin: 0;
+}
+
+/* Mobile first: 2 colunas (4 cards pequenos ficam apertados em 1 coluna só);
+ * ganha a linha única a partir do tablet — mesmo padrão de
+ * `LandingFeatures.module.css`. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.proximasCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.proximasCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.proximasTitulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-md);
+  margin: 0;
+}
+
+.verTodas {
+  color: var(--primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+
+.verTodas:hover {
+  text-decoration: underline;
+}
+
+.proximasLista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.proximaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+}
+
+.proximaTitulo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.proximaPrazo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-sm);
+  color: var(--on-surface-muted);
+  white-space: nowrap;
+}
+
+.proximaPrazo svg {
+  flex-shrink: 0;
+}
+
+.proximaPrazoAtrasado {
+  color: var(--danger);
+  font-weight: var(--weight-medium);
+}

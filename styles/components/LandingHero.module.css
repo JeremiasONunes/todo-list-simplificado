@@ -1,0 +1,183 @@
+/*
+ * Este arquivo é um "CSS Module" — o nome tem ".module.css" no final.
+ * Isso significa que cada classe aqui (.hero, .badge, .titulo...) só existe
+ * DENTRO do componente `LandingHero.jsx`. Se outro arquivo do projeto também
+ * tiver uma classe chamada `.titulo`, elas NÃO vão brigar entre si — o Vite
+ * transforma cada nome em algo único por baixo dos panos (tipo
+ * `_titulo_a1b2c_1`), então nunca existe conflito de nome.
+ */
+
+/* .hero é a "caixa" que envolve toda a seção de abertura da Landing Page
+ * (o badge, o título grande, o subtítulo e os botões). */
+.hero {
+  /* display: flex transforma este elemento num "container flexível" —
+   * isso quer dizer que os filhos dele (badge, título, subtítulo, botões)
+   * vão se organizar em fileira, um do lado/embaixo do outro, seguindo a
+   * direção que a gente escolher na linha de baixo. */
+  display: flex;
+
+  /* flex-direction: column diz "organize os filhos em COLUNA" — um embaixo
+   * do outro, de cima pra baixo (o padrão do flex seria lado a lado). */
+  flex-direction: column;
+
+  /* align-items: center centraliza os filhos NO EIXO CRUZADO — como a
+   * direção é column (vertical), o eixo cruzado é o horizontal, então isso
+   * centraliza tudo na horizontal. */
+  align-items: center;
+
+  /* text-align: center centraliza o TEXTO dentro de cada filho (diferente
+   * do align-items, que centraliza a caixa inteira). */
+  text-align: center;
+
+  /* gap: var(--space-5) cria um espaço fixo ENTRE os filhos (badge→título,
+   * título→subtítulo...), sem precisar de margin em cada um deles.
+   * var(--space-5) busca o valor num arquivo de "tokens" (variáveis CSS
+   * globais) — assim, se um dia quisermos mudar o espaçamento padrão do
+   * site inteiro, mudamos em um lugar só, não em cada arquivo. */
+  gap: var(--space-5);
+
+  /* padding: var(--space-16) var(--space-4) var(--space-12) — três valores
+   * = topo/base diferentes, laterais iguais (regra do CSS: quando você
+   * escreve 3 valores, a ordem é TOPO, LATERAIS, BASE). Aqui: respiro bem
+   * grande em cima (--space-16), respiro médio nas laterais (--space-4) e
+   * respiro grande embaixo (--space-12) — dá aquele "ar" típico de topo de
+   * página. */
+  padding: var(--space-16) var(--space-4) var(--space-12);
+
+  /* max-width: var(--container-narrow) trava a largura máxima do bloco de
+   * texto. Sem isso, numa tela ultra larga o texto esticaria de ponta a
+   * ponta e ficaria difícil de ler (o olho se perde voltando pra linha de
+   * baixo). "narrow" (estreito) é o valor certo pra texto corrido. */
+  max-width: var(--container-narrow);
+
+  /* margin: 0 auto é o truque clássico de CSS pra CENTRALIZAR um bloco
+   * horizontalmente na página: 0 de margem em cima/embaixo, "auto" nas
+   * laterais faz o navegador dividir o espaço sobrando igualmente dos dois
+   * lados. Só funciona porque o elemento já tem um max-width definido. */
+  margin: 0 auto;
+}
+
+/* .badge é aquela "pilulazinha" pequena acima do título
+ * (ex.: "Grátis, sem instalar nada"). */
+.badge {
+  /* inline-flex é como o flex normal, mas o elemento continua se
+   * comportando como texto por fora (não ocupa a linha inteira) — perfeito
+   * pra uma pílula pequena que fica lado a lado com outras coisas. */
+  display: inline-flex;
+
+  /* padding: 6px 16px — respiro vertical menor (6px), respiro horizontal
+   * maior (16px), pra pílula ficar "gorda" na horizontal, do jeito que a
+   * gente reconhece visualmente como uma pílula/badge. */
+  padding: 6px 16px;
+
+  /* border-radius bem grande arredonda TANTO as bordas que a caixa vira uma
+   * pílula (cantos completamente redondos) em vez de um retângulo com
+   * cantos só levemente arredondados. */
+  border-radius: var(--radius-full);
+
+  /* background pega a cor de "superfície" do design system — o fundo
+   * levemente destacado do fundo geral da página, pra pílula não se
+   * misturar com o resto. */
+  background: var(--surface);
+
+  /* Uma borda fina e sutil ao redor, reforçando o contorno da pílula. */
+  border: 1px solid var(--outline);
+
+  /* Fonte pequena — é só um selo informativo, não precisa chamar atenção
+   * como o título principal. */
+  font-size: var(--text-sm);
+
+  /* Cor de texto "apagada" (--on-surface-muted = texto secundário, menos
+   * contrastante que o texto principal) — reforça que essa pílula é
+   * informação extra, não o foco da tela. */
+  color: var(--on-surface-muted);
+}
+
+/* .titulo é o título GRANDE da Landing ("Organize suas tarefas..."). */
+.titulo {
+  /* font-family troca a fonte só deste elemento pra fonte "de destaque" do
+   * projeto (diferente da fonte usada em parágrafos comuns) — títulos e
+   * corpo de texto costumam usar fontes com papéis diferentes. */
+  font-family: var(--font-display);
+
+  /* font-weight: bold deixa o texto mais grosso/forte visualmente. */
+  font-weight: var(--weight-bold);
+
+  /* Tamanho de fonte grande — um dos maiores da escala de tamanhos do
+   * projeto, porque é o elemento mais importante da tela. */
+  font-size: var(--text-2xl);
+
+  /* line-height controla o espaço vertical ENTRE as linhas do texto, caso
+   * o título quebre em duas linhas (como quebra aqui: "Organize suas
+   * tarefas." / "Entenda sua produtividade."). "tight" (apertado) deixa as
+   * linhas mais próximas — títulos grandes ficam com aparência mais solta/
+   * estranha se as linhas tiverem respiro de parágrafo normal. */
+  line-height: var(--leading-tight);
+
+  /* Todo elemento de título (h1, h2...) já vem com uma margem padrão do
+   * navegador — margin: 0 zera essa margem, porque quem está controlando
+   * o espaçamento aqui é o `gap` do `.hero`, não a margem individual de
+   * cada filho. */
+  margin: 0;
+
+  /* Cor do texto do título — usa o token semântico "cor de título", que
+   * hoje aponta pra mesma cor do texto normal, mas dá nome à INTENÇÃO
+   * (“isto é um título”), não só ao valor. */
+  color: var(--text-heading);
+}
+
+/* .subtitulo é o parágrafo de apoio logo abaixo do título grande. */
+.subtitulo {
+  /* Texto secundário, mais apagado que o título — cria hierarquia visual:
+   * o olho vai primeiro no título, depois no subtítulo. */
+  color: var(--on-surface-muted);
+
+  /* Tamanho médio — menor que o título, maior que um texto pequeno de
+   * rodapé. */
+  font-size: var(--text-md);
+
+  /* Aqui, diferente do título, usamos "relaxed" (mais espaçado) — a regra
+   * geral é: texto CORRIDO (frases completas, parágrafo) fica mais fácil
+   * de ler com mais respiro entre linhas; só título CURTO fica melhor
+   * apertado. */
+  line-height: var(--leading-relaxed);
+
+  /* Zera a margem padrão do navegador pro parágrafo, mesma razão do
+   * `.titulo` acima — o espaçamento vem do `gap` do pai. */
+  margin: 0;
+}
+
+/* .acoes é a fileira com os dois botões ("Começar agora" / "Ver como
+ * funciona"). */
+.acoes {
+  /* Container flexível de novo — aqui SEM definir flex-direction, então
+   * fica no padrão do flex: "row" (lado a lado, na horizontal). */
+  display: flex;
+
+  /* flex-wrap: wrap permite que os botões "quebrem linha" se não couberem
+   * lado a lado (ex.: numa tela bem estreita) — sem isso, eles ficariam
+   * espremidos ou vazando pra fora da tela. */
+  flex-wrap: wrap;
+
+  /* Centraliza os botões horizontalmente dentro da fileira. */
+  justify-content: center;
+
+  /* Espaço fixo entre os dois botões. */
+  gap: var(--space-3);
+}
+
+/* @media é uma "condição" de CSS: a regra dentro só se aplica quando a
+ * tela do dispositivo bate com a condição escrita. Aqui: "só aplique isto
+ * quando a largura da tela for de 768px PRA CIMA" (ou seja, tablets e
+ * telas maiores — celulares ficam de fora). Essa técnica se chama "mobile
+ * first": a gente escreve o estilo BASE pensando no celular (a versão mais
+ * simples/restrita) e só ACRESCENTA regras extras pra telas maiores,
+ * nunca o contrário. */
+@media (min-width: 768px) {
+  /* Nesta tela maior, o título fica ainda MAIOR do que já estava lá em
+   * cima — em telas largas, sobra espaço horizontal, então um título maior
+   * continua legível e fica visualmente mais impactante. */
+  .titulo {
+    font-size: var(--text-3xl);
+  }
+}

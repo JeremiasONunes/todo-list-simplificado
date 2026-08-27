@@ -1,0 +1,155 @@
+/*
+ * CSS Module da seção "Tudo que você precisa pra manter o ritmo" — os 4
+ * cards de funcionalidade (Gerencie suas tarefas / Prioridade e prazo /
+ * Busca e filtros / Analytics). Cada classe aqui só existe dentro do
+ * componente `LandingFeatures.jsx`, sem risco de colidir com uma classe de
+ * mesmo nome em outro arquivo do projeto.
+ */
+
+/* .secao é a "moldura" da seção inteira: título + grade de cards. */
+.secao {
+  /* Trava a largura máxima da seção — "max" (não "narrow" como no Hero)
+   * porque aqui a gente QUER aproveitar mais largura de tela (a grade de
+   * 4 cards fica apertada demais numa coluna estreita de texto). */
+  max-width: var(--container-max);
+
+  /* Centraliza a seção horizontalmente na página (mesmo truque do Hero:
+   * margem automática nas laterais). */
+  margin: 0 auto;
+
+  /* Respiro grande em cima/embaixo (--space-12) e médio nas laterais
+   * (--space-4) — separa visualmente esta seção da anterior/seguinte. */
+  padding: var(--space-12) var(--space-4);
+}
+
+/* .titulo é o "Tudo que você precisa pra manter o ritmo" acima dos cards. */
+.titulo {
+  /* Centraliza o texto do título. */
+  text-align: center;
+
+  /* Mesma fonte "de destaque" usada em outros títulos do projeto. */
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+
+  /* Um degrau abaixo do título do Hero (--text-xl < --text-2xl) — o Hero é
+   * o mais importante da página, este título de seção vem depois na
+   * hierarquia visual. */
+  font-size: var(--text-xl);
+
+  /* margin com 3 valores: 0 em cima, 0 nas laterais, --space-8 embaixo —
+   * cria o respiro entre o título e a grade de cards logo abaixo, sem
+   * precisar de uma margem em cima (isso já é resolvido pelo padding do
+   * .secao). */
+  margin: 0 0 var(--space-8);
+}
+
+/* Mobile first: 1 coluna; ganha grade a partir do tablet (mesma ressalva de
+ * `tokens/breakpoints.css` — valor escrito por extenso, não var() aqui dentro). */
+.grade {
+  /* Na versão BASE (celular), a grade não é uma grade de verdade ainda —
+   * é só uma coluna simples, um card embaixo do outro. */
+  display: flex;
+  flex-direction: column;
+
+  /* Espaço entre os cards quando empilhados. */
+  gap: var(--space-4);
+}
+
+/* A partir de 768px de largura (tablet pra cima), a gente TROCA a
+ * estratégia de layout: de "coluna simples" pra "grade de verdade". */
+@media (min-width: 768px) {
+  .grade {
+    /* display: grid liga o modo de layout em grade do CSS — permite
+     * organizar os filhos em linhas E colunas ao mesmo tempo, diferente do
+     * flex (que só pensa numa direção por vez). */
+    display: grid;
+
+    /* grid-template-columns define QUANTAS colunas existem e a largura de
+     * cada uma. repeat(2, 1fr) = "repita 2 colunas, cada uma ocupando
+     * 1 fração do espaço disponível" — ou seja, 2 colunas IGUAIS, cada
+     * uma com metade da largura da grade. */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* A partir de 1024px (telas de notebook/desktop pra cima), tem espaço
+ * sobrando pra mostrar os 4 cards numa fileira só. */
+@media (min-width: 1024px) {
+  .grade {
+    /* Agora repete 4 colunas iguais em vez de 2 — os 4 cards ficam lado a
+     * lado numa única fileira. */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* .item é o conteúdo de CADA card (ícone + título + descrição) — repare
+ * que quem desenha a "caixa" do card (fundo, borda, sombra, cantos
+ * arredondados) é o componente `Card`, importado em `LandingFeatures.jsx`;
+ * esta classe só organiza o que fica DENTRO dele. */
+.item {
+  /* Empilha ícone, título e descrição um embaixo do outro. */
+  display: flex;
+  flex-direction: column;
+
+  /* Espaço pequeno entre eles (menor que o gap da grade lá em cima, porque
+   * aqui é espaçamento INTERNO do card, não entre cards diferentes). */
+  gap: var(--space-2);
+}
+
+/* Círculo atrás do ícone de linha — sem ele, um traço fino sozinho (sem a
+ * massa visual que um emoji tem) fica sem peso na frente do card. `.item` É
+ * um `Card` (fundo `--surface`) — o círculo usa `--background` (um tom
+ * abaixo), senão ficaria invisível sobre o próprio fundo do card. */
+.iconWrapper {
+  /* inline-flex + as duas linhas abaixo = a receita clássica de CSS pra
+   * centralizar um ícone PERFEITAMENTE no meio de uma caixa (tanto na
+   * horizontal quanto na vertical). */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Largura e altura IGUAIS — condição obrigatória pra virar um círculo
+   * perfeito (não uma "pílula" oval) quando combinado com o
+   * border-radius total logo abaixo. */
+  width: 48px;
+  height: 48px;
+
+  /* Arredondamento total: transforma o quadrado 48×48 em círculo. */
+  border-radius: var(--radius-full);
+
+  /* Cor de fundo do círculo (ver o comentário grande acima da classe pra
+   * entender por que precisa ser diferente da cor de fundo do card). */
+  background: var(--background);
+
+  /* Cor do ÍCONE em si — os ícones desta biblioteca (lucide-react)
+   * "herdam" a cor do texto do elemento que os envolve (a propriedade CSS
+   * `color`), então definir `color` aqui pinta o ícone, mesmo ele sendo um
+   * desenho (SVG), não uma letra. */
+  color: var(--primary);
+}
+
+/* .itemTitulo é o título de CADA funcionalidade (ex.: "Busca e filtros"). */
+.itemTitulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+
+  /* Menor que o título da seção inteira (`.titulo` acima) — reforça que
+   * este é um título "de segunda ordem", dentro de um card, não o título
+   * principal da seção. */
+  font-size: var(--text-md);
+  margin: 0;
+}
+
+/* .itemDescricao é o parágrafo curto explicando a funcionalidade. */
+.itemDescricao {
+  /* Texto mais apagado que o título do card — hierarquia de leitura
+   * (primeiro o olho vai no título, depois lê a descrição). */
+  color: var(--on-surface-muted);
+  font-size: var(--text-sm);
+
+  /* Espaçamento de linha "normal" — nem tão apertado quanto um título,
+   * nem tão espaçado quanto um parágrafo longo (esta descrição tem só
+   * 1-2 linhas). */
+  line-height: var(--leading-normal);
+  margin: 0;
+}

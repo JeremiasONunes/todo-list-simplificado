@@ -1,0 +1,23 @@
+/*
+ * Espaçamento — grade de 4px, valores alinhados aos exatos do Lythra nesta
+ * fase (mesmo pedido de fidelidade de `colors.css`): `--space-20` (novo) e
+ * os dois `--container-*` (1100→1200px, 640→680px) — o resto já batia
+ * desde a Fase 1, mesmo método (conjunto fechado, nunca um número solto
+ * tipo `padding: 17px` inventado num componente).
+ */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --container-max: 1200px;
+  --container-narrow: 680px;
+}

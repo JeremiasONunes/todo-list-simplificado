@@ -1,0 +1,44 @@
+/* Texto longo dentro de um `Modal` de altura livre — sem limite, o modal
+ * inteiro cresceria até sair da tela, empurrando o botão de fechar pra fora
+ * da área visível em telas menores. `max-height: 60vh` (relativo à
+ * VIEWPORT, não ao elemento pai) trava o quanto este bloco pode crescer;
+ * `overflow-y: auto` dá scroll só a ele — o cabeçalho do `Modal` (título +
+ * fechar) continua sempre visível. Mesma técnica do Lythra. */
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  color: var(--on-surface);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.conteudo p {
+  margin: 0;
+}
+
+.secao {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  color: var(--on-surface);
+  margin: 0 0 var(--space-2);
+}
+
+.lista {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.aviso {
+  color: var(--on-surface-muted);
+  font-size: var(--text-xs);
+  border-top: 1px solid var(--outline);
+  padding-top: var(--space-4);
+}

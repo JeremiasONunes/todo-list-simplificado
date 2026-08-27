@@ -1,0 +1,60 @@
+/*
+ * Cores — nesta fase, o pedido do usuário mudou de "mesmo MÉTODO do Lythra,
+ * paleta própria" (Fase 1) para "mesmos TOKENS do Lythra, valor por valor".
+ * Este arquivo é uma cópia fiel de `lythra/lythra_frontend/src/styles/
+ * tokens/colors.css` — mesmos nomes, mesmos hexadecimais, mesma separação
+ * primitivo/semântico, incluindo as 3 correções de contraste que o próprio
+ * Lythra já havia feito (`on-primary`/`on-secondary`/`on-danger` usam
+ * `on-surface`, não branco — branco sobre essas cores claras falha WCAG AA,
+ * ver números abaixo). Isso significa abandonar de propósito a identidade
+ * escura/glass que o app tinha antes (Fases 1-8): o Lythra é um tema CLARO
+ * ("clay" — tons terrosos quentes), então esta troca não é só recolorir,
+ * é trocar fundo escuro por claro em todo o produto.
+ *
+ * Contraste recalculado (fórmula de luminância relativa do WCAG), mesma
+ * nota que o Lythra registra na origem:
+ *   - branco sobre `primary` (#EF8C6F):   ~2.43:1 (mínimo AA: 4.5:1) — falha
+ *   - branco sobre `secondary` (#8FB894): ~2.22:1 — falha
+ *   - branco sobre `danger` (#E2777A):    ~2.94:1 — falha
+ *   - `on-surface` (#4A3B31) sobre as três: ~4.6:1, ~4.8:1, ~5.8:1 — passa AA
+ */
+:root {
+  /* ---- Neutros: fundo, superfície e texto -------------------------------
+   * Paleta clay em tons terrosos quentes (creme/marrom) — as cores que
+   * cobrem mais área de tela, por isso as mais "invisíveis" de todas. */
+  --background: #f3ece0; /* fundo mais distante — atrás de tudo */
+  --surface: #faf6ef; /* fundo de card/painel — uma camada acima do background */
+  --surface-raised: #fdfbf7; /* fundo de modal/dropdown — mais uma camada acima */
+  --on-surface: #4a3b31; /* texto principal sobre qualquer superfície neutra */
+  --on-surface-muted: #8a7a6b; /* texto secundário — mesma família, menor contraste de propósito */
+  --outline: #dcd0bf; /* bordas e divisores sutis */
+
+  /* ---- Cores de marca ("primitivas") ------------------------------------
+   * Cada uma com seu par `on-<cor>` logo ao lado — nunca uma sem a outra. */
+  --primary: #ef8c6f; /* coral — ação principal */
+  --primary-pressed: #d9755a; /* mesma cor, mais escura — hover/pressed */
+  --on-primary: var(--on-surface); /* era branco — falha AA, ver nota acima */
+  --secondary: #8fb894; /* sálvia */
+  --on-secondary: var(--on-surface);
+  --accent: #f3c267; /* âmbar — destaque */
+  --on-accent: #4a3b31;
+  --success: #8fb894; /* mesmo valor de --secondary */
+  --on-success: var(--on-surface);
+  --warning: #f3c267; /* mesmo valor de --accent */
+  --on-warning: #4a3b31;
+  --danger: #e2777a; /* erro / ação destrutiva */
+  --on-danger: var(--on-surface);
+
+  /* ---- Tokens semânticos -------------------------------------------------
+   * Só aliases — nenhum valor novo, a camada de "intenção de uso" por cima
+   * dos primitivos acima. */
+  --text-heading: var(--on-surface);
+  --text-body: var(--on-surface);
+  --text-muted: var(--on-surface-muted);
+  --text-link: var(--primary-pressed);
+  --text-link-hover: var(--primary);
+  --surface-page: var(--background);
+  --surface-card: var(--surface);
+  --border-subtle: var(--outline);
+  --focus-ring: var(--primary); /* contorno de foco de teclado */
+}

@@ -1,0 +1,173 @@
+/*
+ * CSS Module do cabeçalho das rotas PÚBLICAS (`Header.jsx`, usado dentro de
+ * `PublicLayout`) — a marca "ToDo List" à esquerda, os links Início/Sobre/
+ * Entrar à direita. Cada classe aqui (.header, .marca, .nav...) só existe
+ * dentro deste componente, mesmo mecanismo de CSS Module já visto nos
+ * arquivos da Landing Page.
+ */
+
+/* .header é a barra inteira do topo da página. */
+.header {
+  /* Container flexível: os dois filhos diretos do header (a marca e o
+   * <nav> com os links) vão ficar lado a lado, na horizontal (é o padrão
+   * do flex quando não escrevemos flex-direction: column). */
+  display: flex;
+
+  /* Alinha os filhos no CENTRO verticalmente — sem isso, se a marca e os
+   * links tiverem alturas ligeiramente diferentes, eles ficariam
+   * desalinhados um em cima, outro embaixo. */
+  align-items: center;
+
+  /* justify-content: space-between empurra os filhos pras DUAS PONTAS do
+   * container, com o espaço sobrando ficando NO MEIO deles — é assim que a
+   * marca fica grudada na borda esquerda e o <nav> na borda direita, sem a
+   * gente precisar calcular margem nenhuma na mão. Só funciona bem com
+   * exatamente 2 (ou poucos) filhos diretos — com muitos filhos, o espaço
+   * ficaria espalhado entre todos eles, não só nas pontas. */
+  justify-content: space-between;
+
+  /* Espaço mínimo garantido entre a marca e o nav, mesmo que o
+   * space-between já normalmente cuide disso — é uma rede de segurança
+   * pra telas muito estreitas, onde o espaço "sobrando" poderia chegar
+   * perto de zero. */
+  gap: var(--space-4);
+
+  /* Respiro interno da barra: menor em cima/embaixo (--space-4), maior
+   * nas laterais (--space-6) — dá aquele "ar" nas bordas sem deixar o
+   * header alto demais verticalmente. */
+  padding: var(--space-4) var(--space-6);
+
+  /* Cor de fundo "de superfície" — mesma cor usada em cards, pra dar uma
+   * leve distinção visual entre o header e o fundo geral da página. */
+  background: var(--surface);
+
+  /* Uma linha fina só embaixo do header, separando ele do conteúdo da
+   * página (o Footer, visto no arquivo anterior, faz o mesmo só que com
+   * border-TOP, porque ele fica embaixo do conteúdo, não em cima). */
+  border-bottom: 1px solid var(--outline);
+
+  /* Uma sombra sutil por baixo do header inteiro — reforça visualmente
+   * que ele está "flutuando" por cima do resto da página, útil
+   * principalmente combinado com o position: sticky logo abaixo. */
+  box-shadow: var(--shadow-md);
+
+  /* position: sticky é um meio-termo entre `static` (comportamento normal,
+   * rola junto com a página) e `fixed` (gruda na tela e nunca se move).
+   * Com sticky, o header rola normalmente ATÉ chegar no topo da tela — daí
+   * ele "gruda" ali e para de rolar, ficando sempre visível conforme o
+   * usuário desce a página. */
+  position: sticky;
+
+  /* top: 0 diz EM QUE PONTO o header deve grudar — aqui, assim que ele
+   * encostar no topo da viewport (0px de distância do topo). Sem essa
+   * linha, o `position: sticky` não sabe onde grudar e não funciona. */
+  top: 0;
+
+  /* z-index controla A ORDEM DE EMPILHAMENTO quando elementos se
+   * sobrepõem na tela (como camadas de um Photoshop) — número mais alto
+   * fica por CIMA dos números mais baixos. 50 garante que o header sempre
+   * apareça por cima do conteúdo da página rolando por baixo dele. */
+  z-index: 50;
+}
+
+/* Cor chapada (não gradiente) — mesmo tratamento do `.nome` do `AuthHeader`
+ * do Lythra pro wordmark ao lado da logo. */
+.marca {
+  /* Mesma fonte "de destaque" usada em títulos por todo o site — reforça
+   * que isto é a marca do produto, não um texto qualquer. */
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lg);
+
+  /* Cor de marca (coral) — diferente da maioria dos textos do site, que
+   * usam a cor neutra de "texto principal"; aqui vale destacar porque é
+   * literalmente o nome do produto. */
+  color: var(--primary);
+
+  /* Remove o sublinhado padrão de link (o componente `<Link>` do React
+   * Router vira um `<a>` por baixo dos panos, que já nasce sublinhado). */
+  text-decoration: none;
+
+  /* white-space: nowrap PROÍBE esse texto de quebrar linha, mesmo que o
+   * espaço aperte — sem isso, em telas bem estreitas "ToDo List" poderia
+   * quebrar virando "ToDo" numa linha e "List" na de baixo, o que ficaria
+   * estranho pra um nome de marca (título CURTO deve ficar sempre numa
+   * linha só). */
+  white-space: nowrap;
+}
+
+/* Só 3 itens (Início/Sobre/Entrar) — cabem numa linha em qualquer largura,
+ * sem precisar do menu hambúrguer que o nav autenticado (6 itens, hoje
+ * `Sidebar`) chegou a ter. */
+.nav {
+  /* Os links ficam lado a lado (padrão do flex: linha). */
+  display: flex;
+
+  /* Alinha os links no centro verticalmente entre si. */
+  align-items: center;
+
+  /* Espaço entre cada link/botão do nav. */
+  gap: var(--space-2);
+}
+
+/* .link é cada item de navegação simples (Início, Sobre). */
+.link {
+  /* Área clicável maior que só o texto — um link só com padding:0 seria
+   * bem mais difícil de "acertar" com o dedo/mouse; este respiro cria uma
+   * área de toque confortável ao redor do texto. */
+  padding: 8px 16px;
+
+  /* Cantos levemente arredondados — mais sutil que a pílula do `.entrar`
+   * (que usa arredondamento TOTAL), porque este é um link comum, não um
+   * botão de destaque. */
+  border-radius: var(--radius-sm);
+
+  /* Cor de texto principal (não apagada) — os links de navegação do
+   * cabeçalho são informação de primeira importância, diferente dos links
+   * do rodapé (que usam a cor "muted"/apagada). */
+  color: var(--on-surface);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+
+/* :hover = só enquanto o mouse está em cima do link. */
+.link:hover {
+  /* Um fundo sutil aparece ao passar o mouse — dá feedback visual de que
+   * aquele texto é clicável, sem precisar mudar a cor do próprio texto. */
+  background: var(--outline);
+}
+
+/* "Entrar" — forma de pílula pra se destacar dos links de texto simples ao
+ * lado, sem virar um `Button` de verdade (é navegação, não ação). */
+.entrar {
+  /* Respiro horizontal um pouco maior que o `.link` comum (20px vs 16px)
+   * — pílulas geralmente "respiram" mais na horizontal pra reforçar a
+   * forma de cápsula. */
+  padding: 8px 20px;
+
+  /* Arredondamento TOTAL — transforma o retângulo numa pílula/cápsula
+   * completa (mesma técnica usada nos botões e no badge do Hero). */
+  border-radius: var(--radius-full);
+
+  /* Fundo levemente destacado (um tom "elevado" da superfície) — junto
+   * com a borda logo abaixo, faz esse link parecer um botão sutil, mesmo
+   * não sendo um `<button>` de verdade por baixo. */
+  background: var(--surface-raised);
+  border: 1px solid var(--outline);
+
+  color: var(--on-surface);
+
+  /* Peso de fonte mais forte que o `.link` comum (semibold vs medium) —
+   * reforça que "Entrar" é a ação mais importante do header pra quem
+   * ainda não tem conta. */
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.entrar:hover {
+  /* No hover, só a COR DA BORDA muda (fica com a cor de marca) — um
+   * feedback mais discreto que o `.link:hover` (que troca o fundo
+   * inteiro), porque este elemento já tem bastante destaque visual
+   * mesmo em repouso. */
+  border-color: var(--primary);
+}

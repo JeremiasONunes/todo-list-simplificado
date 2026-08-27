@@ -1,0 +1,101 @@
+/*
+ * CSS Module do `PublicLayout.jsx` — a "casca" que envolve toda página
+ * pública (o Header + o espaço onde a página ativa entra + o link de
+ * pular pro conteúdo).
+ */
+
+/* `min-height: 100vh` mora AQUI agora (antes cada página tinha seu próprio
+ * `min-h-screen`) — é a casca que precisa garantir altura mínima de tela
+ * cheia, não o conteúdo de cada rota individualmente. */
+.shell {
+  /* Empilha os filhos (link de pular, Header, main) um embaixo do outro —
+   * é essa organização vertical que faz o Header ficar sempre no topo e o
+   * conteúdo da página logo abaixo dele. */
+  display: flex;
+  flex-direction: column;
+
+  /* "vh" (viewport height) é uma unidade RELATIVA À TELA: 100vh = 100% da
+   * altura visível do navegador, não importa o tamanho da tela do
+   * dispositivo. min-height (não height!) garante que a página tenha PELO
+   * MENOS a altura da tela — se o conteúdo for maior que isso, a página
+   * cresce normalmente e gera scroll; se for menor (ex.: a tela de Login,
+   * que tem pouco conteúdo), o `.shell` ainda assim preenche a tela
+   * inteira, evitando aquele "pedaço de fundo cinza" sobrando embaixo. */
+  min-height: 100vh;
+}
+
+/* Sem padding aqui de propósito (mudou na Fase 3): a Landing precisa de
+ * seções "full bleed", cada uma cuidando do próprio espaçamento interno —
+ * forçar um padding global neste nível dobraria o espaçamento em qualquer
+ * página que já tem o seu. Cada página aplica o próprio padding/max-width
+ * quando faz sentido pra ela (`Home`/`Sobre` fazem isso). */
+.content {
+  /* flex: 1 é a peça que resolve um problema comum de layout: "como faço o
+   * conteúdo do MEIO esticar pra preencher o espaço sobrando, empurrando
+   * um rodapé pra sempre ficar colado no fim da tela, mesmo em páginas com
+   * pouco conteúdo?". Como `.shell` (o pai) é flex-direction: column e diz
+   * "eu quero ocupar pelo menos 100vh", e `.content` diz "eu quero
+   * CRESCER (flex: 1) pra ocupar todo espaço que sobrar dentro do pai" —
+   * juntos, eles fazem o `<main>` esticar até onde precisar, sem a gente
+   * calcular altura nenhuma na mão. */
+  flex: 1;
+
+  /* O `<main>` também vira um container flex em coluna — necessário pra
+   * que o `flex: 1` acima funcione corretamente quando a PÁGINA renderizada
+   * dentro dele (via Outlet) também precisar esticar (ex.: uma página com
+   * pouco conteúdo que ainda assim deve ocupar a tela inteira). */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fora da tela por padrão (não `display:none` — isso tiraria do fluxo de
+ * foco do teclado, o oposto do que este link existe pra fazer); `:focus` o
+ * traz de volta pra dentro da viewport, no topo. `z-index` alto porque
+ * precisa ficar por cima do `Header` sticky (`z-index: 50`). */
+.skipLink {
+  /* position: absolute tira o link do fluxo normal da página e permite
+   * posicioná-lo em coordenadas exatas (top/left) — é isso que possibilita
+   * "escondê-lo" longe da área visível daqui a pouco. */
+  position: absolute;
+
+  top: 0;
+
+  /* left: -9999px empurra o link 9999 PIXELS pra ESQUERDA da tela — bem
+   * longe de qualquer área visível, então ele fica efetivamente invisível
+   * sem usar `display: none`. Essa diferença importa: um elemento com
+   * `display: none` some completamente da árvore de acessibilidade (leitor
+   * de tela e navegação por Tab o ignoram por completo); um elemento só
+   * deslocado pra fora da tela continua "existindo" pro teclado — dá pra
+   * chegar nele apertando Tab, mesmo sem ele aparecer visualmente ainda. */
+  left: -9999px;
+
+  /* z-index alto garante que, QUANDO o link aparecer (ver `:focus`
+   * abaixo), ele fique por cima de tudo — inclusive do Header, que já tem
+   * z-index: 50 (visto no arquivo `Header.module.css`). 100 > 50, então
+   * o skip link sempre vence essa "disputa de camadas". */
+  z-index: 100;
+
+  padding: var(--space-2) var(--space-4);
+
+  /* Fundo com a cor de marca (bem chamativo, contrastando bastante com o
+   * resto da página) — faz sentido ser bem visível justamente porque ele
+   * só aparece num momento específico (foco de teclado), não o tempo
+   * todo; quando aparece, precisa ser fácil de notar. */
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+/* :focus é um estado do CSS — parecido com o :hover (que reage ao mouse),
+ * só que :focus reage a um elemento estar "em foco" (selecionado via Tab
+ * do teclado, ou clicado num campo de formulário). */
+.skipLink:focus {
+  /* Ao receber foco, o link volta pras coordenadas normais da tela
+   * (afastando o `left: -9999px` de cima) — é essa mudança de posição,
+   * disparada só pelo estado `:focus`, que faz o link "aparecer" bem na
+   * hora que alguém navegando por teclado chega nele. */
+  left: var(--space-4);
+  top: var(--space-4);
+}

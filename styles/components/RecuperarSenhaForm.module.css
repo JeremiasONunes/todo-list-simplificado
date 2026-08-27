@@ -1,0 +1,44 @@
+.card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.titulo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.mensagem {
+  color: var(--on-surface-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  margin: 0;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: left;
+}
+
+.rodape {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.link,
+.rodape a {
+  color: var(--text-link);
+}
+
+.link:hover,
+.rodape a:hover {
+  color: var(--text-link-hover);
+}
